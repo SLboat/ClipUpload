@@ -37,7 +37,21 @@ $wgResourceModules['ext.ClipUpload'] = array(
 function ClipSetup() {
 
   //申请使用全局变量
-  global $wgOut;
+  global $wgOut, $wgClipUP_Comment;
+
+  //未定义时候的默认值
+  if(is_null($wgClipUP_Comment)){$wgClipUP_Comment = 'clipboard upload';}
+
+  //js临时方式输出一种变量，注册message或许更好
+  $clipup_vars = array(
+    'comment' => $wgClipUP_Comment
+  );
+  
+  //php-json格式化-参考自msupload
+  $clipup_vars = json_encode($clipup_vars);
+
+  //输出到全局script
+  $wgOut->addScript( "<script type=\"{$wgJsMimeType}\">var clipup_vars = $clipup_vars;</script>\n" );
 
   //load module
   $wgOut->addModules( 'ext.ClipUpload' );

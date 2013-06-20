@@ -56,8 +56,8 @@
             formData.append("ignorewarnings", true);
             //文件名这很重要
             formData.append("filename", "just_a_test.png");
-            //多语言化？
-            formData.append("comment", "clipboard upload");
+            //引入注释
+            formData.append("comment", clipup_vars.comment);
             formData.append("format", "json");
             //token这里是
             formData.append("token",  mw.user.tokens.get( 'editToken' ));
