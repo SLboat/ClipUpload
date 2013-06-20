@@ -40,7 +40,7 @@ function ClipSetup() {
   global $wgOut, $wgClipUP_Comment, $wgClipUP_MaxFileSize;
 
   //未定义时候的默认值
-  if(is_null($wgClipUP_Comment)){$wgClipUP_Comment = 'clipboard upload';}
+  if(is_null($wgClipUP_Comment)){$wgClipUP_Comment = 'this file is by clipboard upload\n[[category:clipboard upload]]';}
   //max is 500KB
   if(is_null($wgClipUP_MaxFileSize)){$wgClipUP_MaxFileSize = 500;}
 

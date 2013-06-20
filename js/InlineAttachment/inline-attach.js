@@ -7,16 +7,16 @@
  * Contact: royvankaathoven@hotmail.com
  *
  * Licensed under the MIT License.
- */
-(function(document, window) {
+ */ (function(document, window) {
     "use strict";
 
     /**
      * Simple function to merge the given objects
-     *
+     * 和默认值进行合并，没设置的话就是默认的。。
      * @param {Object[]} object Multiple object parameters
      * @returns {Object}
      */
+
     function merge() {
         var result = {};
         for (var i = arguments.length - 1; i >= 0; i--) {
@@ -36,7 +36,7 @@
         var settings = merge(options, inlineAttach.defaults),
             editor = instance,
             filenameTag = '{filename}',
-            lastValue,
+            lastValue, //最后一次变量
             me = this;
 
         /**
@@ -55,12 +55,12 @@
             formData.append("action", "upload");
             formData.append("ignorewarnings", true);
             //文件名这很重要
-            formData.append("filename", "just_a_test.png");
+            formData.append("filename", settings.filename);
             //引入注释
             formData.append("comment", clipup_vars.comment);
             formData.append("format", "json");
             //token这里是
-            formData.append("token",  mw.user.tokens.get( 'editToken' ));
+            formData.append("token", mw.user.tokens.get('editToken'));
 
             //todo：改写post数据包含更多参数
             xhr.open('POST', settings.uploadUrl);
@@ -96,10 +96,17 @@
             var result = settings.onUploadedFile(data),
                 filename = data.upload.filename;
             if (result !== false && filename) {
-                //替换回去剪贴板文件
-                var text = editor.getValue().replace(lastValue, settings.urlText.replace(filenameTag, filename));
+                var replaceValue = settings.urlText.replace(filenameTag, filename);
+                var editor_ink = ink_get_editor();
+                var mousePos = editor_ink.selectionStart;
+                //替换回去剪贴板文件，替换记录着的上次文件
+                var text = editor.getValue().replace(lastValue, replaceValue);
                 //把已经替换过的文本放入进去
                 editor.setValue(text);
+                //把光标放到背后
+                editor_ink.selectionStart = mousePos;
+                editor_ink.selectionEnd = mousePos;
+
             }
         };
 
@@ -134,11 +141,12 @@
          * @param {String} appended Current content
          * @param {String} previous Value which should be appended after the current content
          */
-         //处理空行
+        //处理空行
+
         function appendInItsOwnLine(previous, appended) {
             return (previous + "\n\n[[D]]" + appended)
-                  .replace(/(\n{2,})\[\[D\]\]/, "\n")
-                  .replace(/^(\n*)/, "");
+                .replace(/(\n{2,})\[\[D\]\]/, "\n")
+                .replace(/^(\n*)/, "");
         }
 
         /**
@@ -150,7 +158,8 @@
             var result = settings.onReceivedFile(file);
             if (result !== false) {
                 lastValue = settings.progressText;
-                editor.setValue(appendInItsOwnLine(editor.getValue(), lastValue));
+                //置入要放入的信息标记，官方的是插入到屁股后面，我们改动回去了wiki的风格
+                //editor.setValue(appendInItsOwnLine(editor.getValue(), lastValue));
             }
         };
 
@@ -171,7 +180,7 @@
                     if (me.isAllowedFile(item)) {
                         result = true;
                         this.onReceivedFile(item.getAsFile());
-                        if(this.customUploadHandler(item.getAsFile())){
+                        if (this.customUploadHandler(item.getAsFile())) {
                             this.uploadFile(item.getAsFile());
                         }
                     }
@@ -195,7 +204,7 @@
                 if (me.isAllowedFile(file)) {
                     result = true;
                     this.onReceivedFile(file);
-                    if(this.customUploadHandler(file)){
+                    if (this.customUploadHandler(file)) {
                         this.uploadFile(file);
                     }
                 }
@@ -233,10 +242,10 @@
         // Where is the filename placed in the response
         downloadFieldName: 'filename',
         allowedTypes: [
-            'image/jpeg',
-            'image/png',
-            'image/jpg',
-            'image/gif'
+                'image/jpeg',
+                'image/png',
+                'image/jpg',
+                'image/gif'
         ],
 
         /**
@@ -261,7 +270,9 @@
          *
          * @return {Boolean} when false is returned it will prevent default upload behavior
          */
-        customUploadHandler: function() { return true; },
+        customUploadHandler: function() {
+            return true;
+        },
 
         /**
          * Custom error handler. Runs after removing the placeholder text and before the alert().
@@ -269,7 +280,9 @@
          *
          * @return {Boolean} when false is returned it will prevent default error behavior
          */
-        customErrorHandler: function() { return true; },
+        customErrorHandler: function() {
+            return true;
+        },
 
         /**
          * Text for default error when uploading
@@ -292,8 +305,8 @@
 
         options = options || {};
 
-        var editor          = new inlineAttach.Editor(input),
-            inlineattach    = new inlineAttach(options, editor);
+        var editor = new inlineAttach.Editor(input),
+            inlineattach = new inlineAttach(options, editor);
 
         input.addEventListener('paste', function(e) {
             inlineattach.onPaste(e);
