@@ -135,8 +135,8 @@
          */
          //处理空行
         function appendInItsOwnLine(previous, appended) {
-            return (previous + "\n\n[[D]]" + appended)
-                  .replace(/(\n{2,})\[\[D\]\]/, "\n\n")
+            return (previous + "\n[[D]]" + appended)
+                  .replace(/(\n{2,})\[\[D\]\]/, "\n")
                   .replace(/^(\n*)/, "");
         }
 
