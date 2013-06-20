@@ -37,16 +37,20 @@ $wgResourceModules['ext.ClipUpload'] = array(
 function ClipSetup() {
 
   //申请使用全局变量
-  global $wgOut, $wgClipUP_Comment;
+  global $wgOut, $wgClipUP_Comment, $wgClipUP_MaxFileSize;
 
   //未定义时候的默认值
   if(is_null($wgClipUP_Comment)){$wgClipUP_Comment = 'clipboard upload';}
+  //max is 500KB
+  if(is_null($wgClipUP_MaxFileSize)){$wgClipUP_MaxFileSize = 500;}
 
   //js临时方式输出一种变量，注册message或许更好
   $clipup_vars = array(
-    'comment' => $wgClipUP_Comment
+    'comment' => $wgClipUP_Comment,
+    'maxfilesize' => $wgClipUP_MaxFileSize
+
   );
-  
+
   //php-json格式化-参考自msupload
   $clipup_vars = json_encode($clipup_vars);
 

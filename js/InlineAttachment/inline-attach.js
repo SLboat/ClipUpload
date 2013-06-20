@@ -98,6 +98,7 @@
             if (result !== false && filename) {
                 //替换回去剪贴板文件
                 var text = editor.getValue().replace(lastValue, settings.urlText.replace(filenameTag, filename));
+                //把已经替换过的文本放入进去
                 editor.setValue(text);
             }
         };
@@ -135,7 +136,7 @@
          */
          //处理空行
         function appendInItsOwnLine(previous, appended) {
-            return (previous + "\n[[D]]" + appended)
+            return (previous + "\n\n[[D]]" + appended)
                   .replace(/(\n{2,})\[\[D\]\]/, "\n")
                   .replace(/^(\n*)/, "");
         }
