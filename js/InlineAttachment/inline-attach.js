@@ -54,10 +54,12 @@
 
             formData.append("action", "upload");
             formData.append("ignorewarnings", true);
+            //文件名这很重要
             formData.append("filename", "just_a_test.png");
             //多语言化？
             formData.append("comment", "clipboard upload");
             formData.append("format", "json");
+            //token这里是
             formData.append("token",  mw.user.tokens.get( 'editToken' ));
 
             //todo：改写post数据包含更多参数
@@ -92,7 +94,7 @@
          */
         this.onUploadedFile = function(data) {
             var result = settings.onUploadedFile(data),
-                filename = data[settings.downloadFieldName];
+                filename = data.upload.filename;
             if (result !== false && filename) {
                 //替换回去剪贴板文件
                 var text = editor.getValue().replace(lastValue, settings.urlText.replace(filenameTag, filename));
@@ -295,6 +297,7 @@
         input.addEventListener('paste', function(e) {
             inlineattach.onPaste(e);
         }, false);
+        /* remove this function
         input.addEventListener('drop', function(e) {
             e.stopPropagation();
             e.preventDefault();
@@ -308,6 +311,7 @@
             e.stopPropagation();
             e.preventDefault();
         }, false);
+        */
     };
 
 })(document, window);

@@ -20,10 +20,10 @@ function setup_clipboard(){
 			uploadUrl: 'api.php',
 
 			// 上传中的文件提醒
-			progressText: ':[uploading file...]()',
+			progressText: ':[uploading file...]()\n',
 
 			//当成功上传后的文件，其中{filename} 标签会用来替换为完整的文件名
-			urlText: "[[{filename}]]",
+			urlText: ":[[file:{filename}]]\n",
 
 			// 当通过剪贴板接受到一个文件的事件，参数{Blob}文件,file,size就是文件大小
 			onReceivedFile: function(file) {
