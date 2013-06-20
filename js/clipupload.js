@@ -10,20 +10,26 @@ if ( $.inArray( mw.config.get( 'wgAction' ), ['edit', 'submit'] ) !== -1 ) {	//�
 
 //开始设置剪贴板玩意
 function setup_clipboard(){
+	//基础api地址
+
 	var ClipSetting={
+
+			base_api_url: 'api.php',
+
 			// 调用的负责处理的API
-			uploadUrl: '../../api.php',
+			uploadUrl: 'api.php',
 
 			// 上传中的文件提醒
-			progressText: '![上传文件中 file...]()',
+			progressText: ':[uploading file...]()',
 
 			//当成功上传后的文件，其中{filename} 标签会用来替换为完整的文件名
 			urlText: "[[{filename}]]",
 
 			// 当通过剪贴板接受到一个文件的事件，参数{Blob}文件,file,size就是文件大小
 			onReceivedFile: function(file) {
-				this.progressText='[[正在上传...文件大小:'+ parseInt(file.size/1000) +'K]]';
-				this.uploadUrl += "?file=hi";
+				//这里会被预先处理
+				this.progressText=':[Clipboard Uploading('+ parseInt(file.size/1000) +'K)]\n';
+				//this.uploadUrl = this.base_api_url + "?action=upload&format=json&filename=" + getTimeFileName() + "&token=" + mw.user.tokens.get( 'editToken' ) ;
 			},
 
 			// 当成功上传了一个文件的事件 参数{Object} json 返回服务器返回来的json数据

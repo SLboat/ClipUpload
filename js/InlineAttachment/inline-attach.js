@@ -52,14 +52,24 @@
             // http://stackoverflow.com/questions/6664967/how-to-give-a-blob-uploaded-as-formdata-a-file-name
             formData.append(settings.uploadFieldName, file, "image-" + Date.now() + ".png");
 
+            formData.append("action", "upload");
+            formData.append("ignorewarnings", true);
+            formData.append("filename", "just_a_test.png");
+            //多语言化？
+            formData.append("comment", "clipboard upload");
+            formData.append("format", "json");
+            formData.append("token",  mw.user.tokens.get( 'editToken' ));
+
             //todo：改写post数据包含更多参数
             xhr.open('POST', settings.uploadUrl);
             xhr.onload = function() {
                 // If HTTP status is OK or Created
                 if (xhr.status === 200 || xhr.status === 201) {
                     var data = JSON.parse(xhr.responseText);
+                    //触发上传完成事件，回传返回data
                     me.onUploadedFile(data);
                 } else {
+                    //触发上传错误事件，不返回任何东西
                     me.onErrorUploading();
                 }
             };
@@ -84,6 +94,7 @@
             var result = settings.onUploadedFile(data),
                 filename = data[settings.downloadFieldName];
             if (result !== false && filename) {
+                //替换回去剪贴板文件
                 var text = editor.getValue().replace(lastValue, settings.urlText.replace(filenameTag, filename));
                 editor.setValue(text);
             }
@@ -106,6 +117,7 @@
          * @param {Object} data
          */
         this.onErrorUploading = function() {
+            //默认删除一切
             var text = editor.getValue().replace(lastValue, "");
             editor.setValue(text);
             if (settings.customErrorHandler()) {
@@ -119,6 +131,7 @@
          * @param {String} appended Current content
          * @param {String} previous Value which should be appended after the current content
          */
+         //处理空行
         function appendInItsOwnLine(previous, appended) {
             return (previous + "\n\n[[D]]" + appended)
                   .replace(/(\n{2,})\[\[D\]\]/, "\n\n")
@@ -130,6 +143,7 @@
          * @param {Blob} file
          */
         this.onReceivedFile = function(file) {
+            //记录并且设置这里，这里返回一个真值用来保证有效的玩意
             var result = settings.onReceivedFile(file);
             if (result !== false) {
                 lastValue = settings.progressText;
@@ -148,6 +162,7 @@
                 clipboardData = e.clipboardData;
 
             if (typeof clipboardData === "object" && clipboardData.items !== null) {
+                //todo: 只处理一个文件
                 for (var i = 0; i < clipboardData.items.length; i++) {
                     var item = clipboardData.items[i];
                     if (me.isAllowedFile(item)) {
