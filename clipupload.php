@@ -33,6 +33,7 @@ $wgResourceModules['ext.ClipUpload'] = array(
  
 function ClipSetup() {
 
+  //申请使用全局变量
   global $wgOut
 
   //load module
