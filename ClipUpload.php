@@ -27,14 +27,17 @@ $wgHooks['EditPage::showEditForm:initial'][] = 'ClipSetup';
 $wgResourceModules['ext.ClipUpload'] = array(
         // load the js module
         'scripts' => array( 'js/InlineAttachment/inline-attach.js', 'js/clipupload.js' ),
-
+        //本地基础路径
+        'localBasePath' => dirname( __FILE__ ),
+        //远程扩展路径？
+        'remoteExtPath' => 'ClipUpload'
 );
 
  
 function ClipSetup() {
 
   //申请使用全局变量
-  global $wgOut
+  global $wgOut;
 
   //load module
   $wgOut->addModules( 'ext.ClipUpload' );
