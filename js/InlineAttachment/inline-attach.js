@@ -52,6 +52,7 @@
             // http://stackoverflow.com/questions/6664967/how-to-give-a-blob-uploaded-as-formdata-a-file-name
             formData.append(settings.uploadFieldName, file, "image-" + Date.now() + ".png");
 
+            //todo：改写post数据包含更多参数
             xhr.open('POST', settings.uploadUrl);
             xhr.onload = function() {
                 // If HTTP status is OK or Created
