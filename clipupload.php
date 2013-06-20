@@ -22,21 +22,21 @@ $wgExtensionCredits['parserhook'][] = array(
 $dir = dirname(__FILE__).'/';
 //$wgAvailableRights[] = 'msupload';
 
-$wgHooks['EditPage::showEditForm:initial'][] = 'MSLSetup';
+$wgHooks['EditPage::showEditForm:initial'][] = 'ClipSetup';
 
-$wgResourceModules['ext.MsUpload'] = array(
+$wgResourceModules['ext.ClipUpload'] = array(
         // load the js module
         'scripts' => array( 'js/InlineAttachment/inline-attach.js', 'js/clipupload.js' ),
 
 );
 
  
-function MSLSetup() {
+function ClipSetup() {
 
   global $wgOut
 
   //load module
-  $wgOut->addModules( 'ext.MsUpload' );
+  $wgOut->addModules( 'ext.ClipUpload' );
 
   return true;
 }
