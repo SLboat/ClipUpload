@@ -6,3 +6,9 @@ if ( $.inArray( mw.config.get( 'wgAction' ), ['edit', 'submit'] ) !== -1 ) {	//�
 	//开始注入编辑器
 }
 });
+
+//开始设置剪贴板玩意
+function setup_clipboard(){
+
+
+}

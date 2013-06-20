@@ -26,7 +26,7 @@ $wgHooks['EditPage::showEditForm:initial'][] = 'MSLSetup';
 
 $wgResourceModules['ext.MsUpload'] = array(
         // load the js module
-        'scripts' => array( 'js/InlineAttachment/jquery.inline-attach.js', 'js/clipupload.js' ),
+        'scripts' => array( 'js/InlineAttachment/inline-attach.js', 'js/clipupload.js' ),
 
 );
 
@@ -34,7 +34,7 @@ $wgResourceModules['ext.MsUpload'] = array(
 function MSLSetup() {
 
   global $wgOut
-  
+
   //load module
   $wgOut->addModules( 'ext.MsUpload' );
 
