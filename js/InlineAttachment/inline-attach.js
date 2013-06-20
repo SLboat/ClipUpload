@@ -7,7 +7,8 @@
  * Contact: royvankaathoven@hotmail.com
  *
  * Licensed under the MIT License.
- */ (function(document, window) {
+ */
+(function(document, window) {
     "use strict";
 
     /**
@@ -98,7 +99,7 @@
             if (result !== false && filename) {
                 var replaceValue = settings.urlText.replace(filenameTag, filename);
                 var editor_ink = ink_get_editor();
-                var mousePos = editor_ink.selectionStart;
+                var mousePos = editor_ink.selectionStart + (replaceValue.length - lastValue.length);
                 //替换回去剪贴板文件，替换记录着的上次文件
                 var text = editor.getValue().replace(lastValue, replaceValue);
                 //把已经替换过的文本放入进去

@@ -39,11 +39,11 @@ function setup_clipboard() {
 			//检查文件大小
 			if (CheckFileSize(file.size)) {
 				//显示工具栏提示
-				this.progressText = (":[Clip_Upload:File has too large: " + KBSize + "KB!]\now");
+				this.progressText = (":[Clip_Upload:File has too large: " + KBSize + "KB!]");
 				//文件太大了，加以提醒
 			} else {
 				//这里会被预先处理
-				this.progressText = ":[Clip_Upload:Uploading file:" + this.filename + "(" + KBSize + "KB)]...\n";
+				this.progressText = ":[Clip_Upload:Uploading file:" + this.filename + "(" + KBSize + "KB)...]";
 			}
 			ink_go(this.progressText);
 			return true;
@@ -190,9 +190,7 @@ function ink_go(ink) {
     /* 在来考虑换行好吧 */
     if (!ink_is_in_newline()) 
     {
-        ink = br + ink;
-        var curr_pos = 1; //光标坐标，换行了，第一个开始
-    
+        ink = br + ink;    
     }
     /* 好了，送入墨水 */
     ink_inject(ink, curr_pos);
@@ -214,13 +212,8 @@ function ink_inject(ink, curr_pos) {
     var startPos = editor.selectionStart;
     var endPos = editor.selectionEnd;
     
-    if (curr_pos > -1) 
-    {
-        mousePos = startPos + curr_pos; //传入位置+漂移
-    } else {
-        mousePos = startPos + ink.length; //初始化位置+长度
-    }
-    
+    mousePos = startPos + ink.length + curr_pos; //初始化位置+长度
+
     selText = editor.value.substring(startPos, endPos);
 
     //插入标签？
