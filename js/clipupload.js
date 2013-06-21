@@ -25,10 +25,10 @@ function work_clipboard() {
 		filename: 'I_From_CLIP.PNG', //临时的文件名
 
 		// 上传中的文件提醒
-		progressText: ':[Clip_Upload:uploading file...]()',
+		progressText: mw.msg('clipup-progressText'),
 
 		// 上传失败的提醒
-		failduploadText: ':[Clip_Upload:upload fiald({reason})]',
+		failduploadText: mw.msg('clipup-failduploadText'),
 
 		//当成功上传后的文件，其中{filename} 标签会用来替换为完整的文件名
 		urlText: ":[[File:{filename}]]",
@@ -52,9 +52,10 @@ function work_clipboard() {
 				//文件太大了，加以提醒
 			} else {
 				//这里会被预先处理
-				this.progressText = ":[Clip_Upload:Uploading:" + this.filename + "(" + KBSize + "KB)...]";
+				this.progressText = mw.msg("clipup-uploadingText").replace("{filename", this.filename).replace("{filesize}", KBSzie)
+
 			}
-			this.progressText += "\n";//加上回车收尾
+			this.progressText += "\n"; //加上回车收尾
 			ink_go(this.progressText);
 			return true;
 		},
