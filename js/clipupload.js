@@ -34,7 +34,7 @@ function work_clipboard() {
 		mwfeedbackerrorText: mw.msg("clipup-mwfeedbackerrorText"),
 
 		//当成功上传后的文件，其中{filename} 标签会用来替换为完整的文件名
-		urlText: mw.msg("clipup-urlText"),
+		urlText: mw.msg("clipup-urlText").replace("%s", "{filename}"),
 
 		// 当通过剪贴板接受到一个文件的事件，参数{Blob}文件,file,size就是文件大小
 		onReceivedFile: function(file) {
@@ -51,11 +51,11 @@ function work_clipboard() {
 				this.progressText = mw.msg("clipup-notsamesize");
 			} else if (CheckFileSize(file.size)) {
 				//显示工具栏提示
-				this.progressText = mw.msg("clipup-filehastoolarge").replace("{filesize}",KBSize);
+				this.progressText = mw.msg("clipup-filehastoolarge").replace("%s", KBSize);
 				//文件太大了，加以提醒
 			} else {
 				//这里会被预先处理
-				this.progressText = mw.msg("clipup-uploadingText").replace("{filename", this.filename).replace("{filesize}", KBSize)
+				this.progressText = mw.msg("clipup-uploadingText").replace("%s", this.filename).replace("%s", KBSize)
 
 			}
 			this.progressText += "\n"; //加上回车收尾

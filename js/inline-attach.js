@@ -101,7 +101,7 @@
             //检查是否出错
             if (data.error) {
                 //进行适当的替换最终错误信息
-                replaceValue = this.mwfeedbackerrorText.replace("{info}", data.error.info);
+                replaceValue = this.mwfeedbackerrorText.replace("%s", data.error.info);
             } else {
                 var return_json = data.upload;
                 //检查返回状态
@@ -125,7 +125,7 @@
                         replaceValue = settings.urlText.replace(filenameTag, filename);
 
                     } else { //其他报警信息，只是提示
-                        replaceValue = settings.failduploadText.replace("{reason}", last_waring_name);
+                        replaceValue = settings.failduploadText.replace("%s", last_waring_name);
 
                     }
 

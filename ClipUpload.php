@@ -14,8 +14,8 @@ if (!defined('MEDIAWIKI')) {
 $wgExtensionCredits['parserhook'][] = array(
     'name' => 'ClipUpload',
     'url' => 'http://see.sl088.com/id/49t',
-    'clipup-desc' => 'clipup-desc',
-    'version' => '1.1',
+    'descriptionmsg' => 'clipup-desc',
+    'version' => '1.2',
     'author' => '[http://see.sl088.ccom SLboat]'
 );
 
@@ -36,7 +36,13 @@ $wgResourceModules['ext.ClipUpload'] = array(
         'clipup-desc',
         'clipup-progressText',
         'clipup-failduploadText',
-        'clipup-uploadingText'
+        'clipup-uploadingText',
+        'clipup-urlText', 
+        'clipup-notsamesize',
+        'clipup-filehastoolarge', 
+        'clipup-errdoingupload',
+        'clipup-mwfeedbackerrorText',
+
     ),
     //本地基础路径
     'localBasePath' => dirname(__FILE__),
