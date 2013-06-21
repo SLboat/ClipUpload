@@ -20,7 +20,7 @@ $wgExtensionCredits['parserhook'][] = array(
 );
 
 $dir = dirname(__FILE__) . '/';
-$wgExtensionMessagesFiles['clipup'] = $dir . 'msupload.i18n.php';
+$wgExtensionMessagesFiles['clipup'] = $dir . 'ClipUpload.i18n.php';
 
 $wgHooks['EditPage::showEditForm:initial'][] = 'ClipSetup';
 
