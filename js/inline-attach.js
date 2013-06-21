@@ -7,8 +7,7 @@
  * Contact: royvankaathoven@hotmail.com
  *
  * Licensed under the MIT License.
- */
-(function(document, window) {
+ */ (function(document, window) {
     "use strict";
 
     /**
@@ -54,7 +53,9 @@
             formData.append(settings.uploadFieldName, file, "image-" + Date.now() + ".png");
 
             formData.append("action", "upload");
+            //保留文件上传提醒-考虑到它是如此的紧要
             //formData.append("ignorewarnings", true);
+
             //文件名这很重要
             formData.append("filename", settings.filename);
             //引入注释
@@ -99,7 +100,8 @@
                 filename;
             //检查是否出错
             if (data.error) {
-                replaceValue = "[Clip_Upload:Error Upload(" + data.error.info + ")]";
+                //进行适当的替换最终错误信息
+                replaceValue = this.mwfeedbackerrorText.replace("{info}", data.error.info);
             } else {
                 var return_json = data.upload;
                 //检查返回状态

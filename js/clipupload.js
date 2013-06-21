@@ -17,27 +17,30 @@ function work_clipboard() {
 
 	var ClipSetting = {
 
-		base_api_url: 'api.php',
+		base_api_url: "api.php",
 
 		// 调用的负责处理的API
-		uploadUrl: 'api.php',
+		uploadUrl: "api.php",
 
-		filename: 'I_From_CLIP.PNG', //临时的文件名
+		filename: "I_From_CLIP.PNG", //临时的文件名
 
 		// 上传中的文件提醒
-		progressText: mw.msg('clipup-progressText'),
+		progressText: mw.msg("clipup-progressText"),
 
 		// 上传失败的提醒
-		failduploadText: mw.msg('clipup-failduploadText'),
+		failduploadText: mw.msg("clipup-failduploadText"),
+
+		//得到了错误的返回的时候
+		mwfeedbackerrorText: mw.msg("clipup-mwfeedbackerrorText"),
 
 		//当成功上传后的文件，其中{filename} 标签会用来替换为完整的文件名
-		urlText: ":[[File:{filename}]]",
+		urlText: mw.msg("clipup-urlText"),
 
 		// 当通过剪贴板接受到一个文件的事件，参数{Blob}文件,file,size就是文件大小
 		onReceivedFile: function(file) {
 			var KBSize = Math.round(file.size / 1024);
 			if (clipup_vars.debug)
-				this.filename = 'I_From_CLIP.PNG'; //调试文件名称
+				this.filename = "I_From_CLIP.PNG"; //调试文件名称
 			else {
 				//获得一个文件名-独一无二的
 				this.filename = getTimeFileName();
@@ -45,14 +48,14 @@ function work_clipboard() {
 			//检查文件大小
 			if (file.size == last_file_size) {
 				//和上次一样不传
-				this.progressText = (":[Clip_Upload:Clip has same]");
+				this.progressText = mw.msg("clipup-notsamesize");
 			} else if (CheckFileSize(file.size)) {
 				//显示工具栏提示
-				this.progressText = (":[Clip_Upload:File has too large: " + KBSize + "KB!]");
+				this.progressText = mw.msg("clipup-filehastoolarge").replace("{filesize}",KBSize);
 				//文件太大了，加以提醒
 			} else {
 				//这里会被预先处理
-				this.progressText = mw.msg("clipup-uploadingText").replace("{filename", this.filename).replace("{filesize}", KBSzie)
+				this.progressText = mw.msg("clipup-uploadingText").replace("{filename", this.filename).replace("{filesize}", KBSize)
 
 			}
 			this.progressText += "\n"; //加上回车收尾
@@ -61,7 +64,7 @@ function work_clipboard() {
 		},
 		onErrorUploading: function(return_json) {
 			//未做具体处理
-			mw_inserttag(":[Clip_Upload:Error to upload]")
+			mw_inserttag(mw.msg("clipup-errdoingupload"))
 		},
 
 		//当成功上传了一个文件的事件 参数{Object} json 返回服务器返回来的json数据
@@ -112,7 +115,7 @@ function getTimeFileName(file_index) {
 //插入到当前编辑框
 
 function mw_inserttag(str) {
-	mw.toolbar.insertTags(str, '', '')
+	mw.toolbar.insertTags(str, "", "")
 }
 
 //检查文件大小，传入完整比特单位的filesize
