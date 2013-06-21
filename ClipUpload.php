@@ -45,35 +45,6 @@ $wgResourceModules['ext.ClipUpload'] = array(
 );
 
 
-<<<<<<< HEAD
-  //申请使用全局变量
-  global $wgOut, $wgClipUP_Comment, $wgClipUP_MaxFileSize, $wgClipUP_CheckSameFileSize;
-
-  //未定义时候的默认值
-  if(is_null($wgClipUP_Comment)){$wgClipUP_Comment = 'this file is upload by clipboard [[category:clipboard upload]]';}
-  //最大默认500K
-  if(is_null($wgClipUP_MaxFileSize)){$wgClipUP_MaxFileSize = 500;}
-  //是否检查文件一样大小
-  if(is_null($wgClipUP_CheckSameFileSize)){$wgClipUP_CheckSameFileSize = flase;}
-
-  //js临时方式输出一种变量，注册message或许更好
-  $clipup_vars = array(
-    'comment' => $wgClipUP_Comment,
-    'maxfilesize' => $wgClipUP_MaxFileSize
-
-  );
-
-  //php-json格式化-参考自msupload
-  $clipup_vars = json_encode($clipup_vars);
-
-  //输出到全局script
-  $wgOut->addScript( "<script type=\"{$wgJsMimeType}\">var clipup_vars = $clipup_vars;</script>\n" );
-
-  //load module
-  $wgOut->addModules( 'ext.ClipUpload' );
-
-  return true;
-=======
 function ClipSetup()
 {
     
@@ -82,7 +53,7 @@ function ClipSetup()
     
     //未定义时候的默认值
     if (is_null($wgClipUP_Comment)) {
-        $wgClipUP_Comment = 'this file is by clipboard upload\n[[category:clipboard upload]]';
+        $wgClipUP_Comment = 'this file is by clipboard upload  [[category:clipboard upload]]';
     }
     //最大默认500K
     if (is_null($wgClipUP_MaxFileSize)) {
@@ -110,5 +81,4 @@ function ClipSetup()
     $wgOut->addModules('ext.ClipUpload');
     
     return true;
->>>>>>> 07817e6eae43b7524b882d80972f609bbe7177a9
 }
