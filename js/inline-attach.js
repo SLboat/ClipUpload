@@ -99,7 +99,7 @@
                 filename;
             //检查是否出错
             if (data.error) {
-                replaceValue = "[Clip_Upload:Error Upload" + data.error.info + "]";
+                replaceValue = "[Clip_Upload:Error Upload(" + data.error.info + ")]";
             } else {
                 var return_json = data.upload;
                 //检查返回状态
