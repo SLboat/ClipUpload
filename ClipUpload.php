@@ -15,7 +15,7 @@ $wgExtensionCredits['parserhook'][] = array(
 	'name' => 'ClipUpload',
 	'url'  => 'http://see.sl088.com/id/49t',
 	'description' => 'Quick Uplaod use clipboard,base on InlineAttachment',
-	'version' => '1.0',
+	'version' => '1.1',
 	'author' => '[http://see.sl088.ccom SLboat]',
 );
 
@@ -26,7 +26,7 @@ $wgHooks['EditPage::showEditForm:initial'][] = 'ClipSetup';
 
 $wgResourceModules['ext.ClipUpload'] = array(
         // load the js module
-        'scripts' => array( 'js/InlineAttachment/inline-attach.js', 'js/clipupload.js' ),
+        'scripts' => array( 'js/inline-attach.js', 'js/clipupload.js', 'js/ink-go.js' ),
         //本地基础路径
         'localBasePath' => dirname( __FILE__ ),
         //远程扩展路径？
