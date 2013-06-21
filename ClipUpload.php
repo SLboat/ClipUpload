@@ -37,12 +37,14 @@ $wgResourceModules['ext.ClipUpload'] = array(
 function ClipSetup() {
 
   //申请使用全局变量
-  global $wgOut, $wgClipUP_Comment, $wgClipUP_MaxFileSize;
+  global $wgOut, $wgClipUP_Comment, $wgClipUP_MaxFileSize, $wgClipUP_CheckSameFileSize;
 
   //未定义时候的默认值
   if(is_null($wgClipUP_Comment)){$wgClipUP_Comment = 'this file is by clipboard upload\n[[category:clipboard upload]]';}
-  //max is 500KB
+  //最大默认500K
   if(is_null($wgClipUP_MaxFileSize)){$wgClipUP_MaxFileSize = 500;}
+  //是否检查文件一样大小
+  if(is_null($wgClipUP_CheckSameFileSize)){$wgClipUP_CheckSameFileSize = flase;}
 
   //js临时方式输出一种变量，注册message或许更好
   $clipup_vars = array(

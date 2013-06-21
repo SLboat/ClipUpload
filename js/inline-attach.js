@@ -54,7 +54,7 @@
             formData.append(settings.uploadFieldName, file, "image-" + Date.now() + ".png");
 
             formData.append("action", "upload");
-            formData.append("ignorewarnings", true);
+            //formData.append("ignorewarnings", true);
             //文件名这很重要
             formData.append("filename", settings.filename);
             //引入注释
@@ -69,8 +69,8 @@
                 // If HTTP status is OK or Created
                 if (xhr.status === 200 || xhr.status === 201) {
                     var data = JSON.parse(xhr.responseText);
-                    //触发上传完成事件，回传返回data
-                    me.onUploadedFile(data);
+                    //触发上传完成事件，回传返回data，传回原始file
+                    me.onUploadedFile(data, file);
                 } else {
                     //触发上传错误事件，不返回任何东西
                     me.onErrorUploading();
@@ -93,11 +93,40 @@
          *
          * @param {Object} data
          */
-        this.onUploadedFile = function(data) {
-            var result = settings.onUploadedFile(data),
-                filename = data.upload.filename;
-            if (result !== false && filename) {
-                var replaceValue = settings.urlText.replace(filenameTag, filename);
+        this.onUploadedFile = function(data, upload_file) {
+            var result = settings.onUploadedFile(data, upload_file)
+            var replaceValue = null,
+                filename;
+
+            var return_json = data.upload;
+            //检查返回状态
+            if (return_json.result == "Success") {
+                filename = return_json.filename;
+                //最终替换值
+                replaceValue = settings.urlText.replace(filenameTag, filename);
+            } else if (return_json.result == "Warning") {
+                var last_waring_name;
+                for (var Warning_Type in return_json.warnings) {
+                    last_waring_name = Warning_Type;
+                }
+                //这里获得了警告类型
+                if (last_waring_name == "duplicate") {
+                    //写入重复的名称
+                    filename = return_json.warnings.duplicate[0];
+                    replaceValue = settings.urlText.replace(filenameTag, filename);
+                } else if (last_waring_name == "exists") {
+                    //已经存在
+                    filename = return_json.warnings.exists;
+                    replaceValue = settings.urlText.replace(filenameTag, filename);
+
+                } else { //其他报警信息，只是提示
+                    replaceValue = settings.failduploadText.replace("{reason}", last_waring_name);
+
+                }
+
+            }
+            if (result !== false && replaceValue) {
+                replaceValue += "\n"; //加上多个换行，总是如此
                 var editor_ink = ink_get_editor();
                 var mousePos = editor_ink.selectionStart + (replaceValue.length - lastValue.length);
                 //替换回去剪贴板文件，替换记录着的上次文件

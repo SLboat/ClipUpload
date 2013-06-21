@@ -1,16 +1,17 @@
 var gallery_arr = new Array();
+var last_file_size = 0; //上次文件大小
 
 $(document).ready(function() { //jquery      
 	/* Check if we are in edit mode and the required modules are available and then customize the toolbar */
 	if ($.inArray(mw.config.get('wgAction'), ['edit', 'submit']) !== -1) { //注入工具栏
 		//开始注入编辑器
-		setup_clipboard();
+		work_clipboard();
 	}
 });
 
 //开始设置剪贴板玩意
 
-function setup_clipboard() {
+function work_clipboard() {
 	//基础api地址
 	clipup_vars.debug = clipup_vars.debug || false; //默认为假
 
@@ -24,39 +25,57 @@ function setup_clipboard() {
 		filename: 'I_From_CLIP.PNG', //临时的文件名
 
 		// 上传中的文件提醒
-		progressText: ':[uploading file...]()\n',
+		progressText: ':[Clip_Upload:uploading file...]()',
+
+		// 上传失败的提醒
+		failduploadText: ':[Clip_Upload:upload fiald({reason})]',
 
 		//当成功上传后的文件，其中{filename} 标签会用来替换为完整的文件名
-		urlText: ":[[File:{filename}]]\n",
+		urlText: ":[[File:{filename}]]",
 
 		// 当通过剪贴板接受到一个文件的事件，参数{Blob}文件,file,size就是文件大小
 		onReceivedFile: function(file) {
 			var KBSize = Math.round(file.size / 1024);
-			if (!clipup_vars.debug){
+			if (clipup_vars.debug)
+				this.filename = 'I_From_CLIP.PNG'; //调试文件名称
+			else {
 				//获得一个文件名-独一无二的
 				this.filename = getTimeFileName();
 			}
 			//检查文件大小
-			if (CheckFileSize(file.size)) {
+			if (file.size == last_file_size) {
+				//和上次一样不传
+				this.progressText = (":[Clip_Upload:Clip has same]");
+			} else if (CheckFileSize(file.size)) {
 				//显示工具栏提示
 				this.progressText = (":[Clip_Upload:File has too large: " + KBSize + "KB!]");
 				//文件太大了，加以提醒
 			} else {
 				//这里会被预先处理
-				this.progressText = ":[Clip_Upload:Uploading file:" + this.filename + "(" + KBSize + "KB)...]";
+				this.progressText = ":[Clip_Upload:Uploading:" + this.filename + "(" + KBSize + "KB)...]";
 			}
+			this.progressText += "\n";//加上回车收尾
 			ink_go(this.progressText);
 			return true;
 		},
 		onErrorUploading: function(return_json) {
-			mw_inserttag("\n:[Clip_Upload:Faild to upload]")
+			//未做具体处理
+			mw_inserttag(":[Clip_Upload:Error to upload]")
 		},
 
-		// 当成功上传了一个文件的事件 参数{Object} json 返回服务器返回来的json数据
-		onUploadedFile: function(return_json) {},
+		//当成功上传了一个文件的事件 参数{Object} json 返回服务器返回来的json数据
+		onUploadedFile: function(return_json, file) {
+
+			return true;
+
+		},
 
 		//上传前处理文件是否可以上载
 		customUploadHandler: function(file) {
+			if (file.size == last_file_size) {
+				//文件大写一样不传
+				return false;
+			}
 			//检查文件够大不
 			return !CheckFileSize(file.size);
 
@@ -79,14 +98,14 @@ function getTimeFileName(file_index) {
 	if (typeof(file_index) == "undefined") {
 		file_index = ""; // 未定义的时候得到空白
 	} else {
-		file_index = "_" + file_index;
+		file_index = "-" + file_index;
 	}
 	// 文件名后缀，暂时只处理jpg，因为ios6的相册都是jpg
 	var file_ext = ".PNG";
 	//获得时间串
-	var timestr = get_format_date("yyMMdd_hhmmss");
-	//得到最终的新文件名
-	return "ClipCapIt_" + "_" + timestr + file_ext
+	var timestr = get_format_date("yyMMdd-hhmmss");
+	//得到最终的新文件名，前缀加连接字符等玩意构成了最终的小玩意
+	return "ClipCapIt" + "-" + timestr + file_ext
 }
 
 //插入到当前编辑框
