@@ -97,30 +97,35 @@
             var result = settings.onUploadedFile(data, upload_file)
             var replaceValue = null,
                 filename;
-
-            var return_json = data.upload;
-            //检查返回状态
-            if (return_json.result == "Success") {
-                filename = return_json.filename;
-                //最终替换值
-                replaceValue = settings.urlText.replace(filenameTag, filename);
-            } else if (return_json.result == "Warning") {
-                var last_waring_name;
-                for (var Warning_Type in return_json.warnings) {
-                    last_waring_name = Warning_Type;
-                }
-                //这里获得了警告类型
-                if (last_waring_name == "duplicate") {
-                    //写入重复的名称
-                    filename = return_json.warnings.duplicate[0];
+            //检查是否出错
+            if (data.error) {
+                replaceValue = "[Clip_Upload:Error Upload" + data.error.info + "]";
+            } else {
+                var return_json = data.upload;
+                //检查返回状态
+                if (return_json.result == "Success") {
+                    filename = return_json.filename;
+                    //最终替换值
                     replaceValue = settings.urlText.replace(filenameTag, filename);
-                } else if (last_waring_name == "exists") {
-                    //已经存在
-                    filename = return_json.warnings.exists;
-                    replaceValue = settings.urlText.replace(filenameTag, filename);
+                } else if (return_json.result == "Warning") {
+                    var last_waring_name;
+                    for (var Warning_Type in return_json.warnings) {
+                        last_waring_name = Warning_Type;
+                    }
+                    //这里获得了警告类型
+                    if (last_waring_name == "duplicate") {
+                        //写入重复的名称
+                        filename = return_json.warnings.duplicate[0];
+                        replaceValue = settings.urlText.replace(filenameTag, filename);
+                    } else if (last_waring_name == "exists") {
+                        //已经存在
+                        filename = return_json.warnings.exists;
+                        replaceValue = settings.urlText.replace(filenameTag, filename);
 
-                } else { //其他报警信息，只是提示
-                    replaceValue = settings.failduploadText.replace("{reason}", last_waring_name);
+                    } else { //其他报警信息，只是提示
+                        replaceValue = settings.failduploadText.replace("{reason}", last_waring_name);
+
+                    }
 
                 }
 
@@ -221,27 +226,6 @@
             return result;
         };
 
-        /**
-         * Catches onDrop event
-         *
-         * @param {Event} e
-         * @returns {Boolean} If a file is handled
-         */
-        this.onDrop = function(e) {
-            var result = false;
-            for (var i = 0; i < e.dataTransfer.files.length; i++) {
-                var file = e.dataTransfer.files[i];
-                if (me.isAllowedFile(file)) {
-                    result = true;
-                    this.onReceivedFile(file);
-                    if (this.customUploadHandler(file)) {
-                        this.uploadFile(file);
-                    }
-                }
-            }
-
-            return result;
-        };
     };
 
     /**
@@ -341,21 +325,7 @@
         input.addEventListener('paste', function(e) {
             inlineattach.onPaste(e);
         }, false);
-        /* remove this function
-        input.addEventListener('drop', function(e) {
-            e.stopPropagation();
-            e.preventDefault();
-            inlineattach.onDrop(e);
-        }, false);
-        input.addEventListener('dragenter', function(e) {
-            e.stopPropagation();
-            e.preventDefault();
-        }, false);
-        input.addEventListener('dragover', function(e) {
-            e.stopPropagation();
-            e.preventDefault();
-        }, false);
-        */
+
     };
 
 })(document, window);
