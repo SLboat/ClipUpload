@@ -28,18 +28,7 @@
 		}
 		return result;
 	}
-	//todo:合并到ink_go里面去，还给航海见识墨水
 
-	/* 模式子串逃跑函数
-	 * 作用：让模式子串的样子串变得可以随意被search等强制模式的函数认识
-	 * 试试看：escape_from_regexp("[s")
-	 * 可用性："[sssa".search(escape_from_regexp("[ss"))
-	 * 参考自 http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript
-	 */
-	function escape_from_regexp (s) {
-		return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-	}
-	
 	/**
 	 * @param {Object} options
 	 */
@@ -146,23 +135,8 @@
 			}
 			if (result !== false && replaceValue) {
 				replaceValue += "\n"; //加上多个换行，总是如此
-				var editor_ink = ink_get_editor();
-				//记下上次位置，记忆
-				var lastValue_Pos=editor.getValue().search(escape_from_regexp(lastValue));
-				//回忆上次位置，看看是否需要变化
-				if (editor_ink.selectionStart>lastValue_Pos){
-					//todo:考虑如果在字符中间？
-					var mousePos = editor_ink.selectionStart + (replaceValue.length - lastValue.length);
-				}
-				//替换回去剪贴板文件，替换记录着的上次文件
-				var text = editor.getValue()
-					.replace(lastValue, replaceValue);
-					
-				//把已经替换过的文本放入进去
-				editor.setValue(text);
-				//把光标放到背后
-				editor_ink.selectionStart = mousePos;
-				editor_ink.selectionEnd = mousePos;
+				//交给工厂去代劳
+				ink_replace(lastValue,replaceValue);
 
 			}
 		};
@@ -184,11 +158,8 @@
 		 * @param {Object} data
 		 */
 		this.onErrorUploading = function() {
-			//默认删除一切
-			//todo:移动鼠标位置
-			var text = editor.getValue()
-				.replace(lastValue, "");
-			editor.setValue(text);
+			//默认删除一切						
+			ink_replace(lastValue,"");	
 			if (settings.customErrorHandler()) {
 				window.alert(settings.errorText);
 			}
