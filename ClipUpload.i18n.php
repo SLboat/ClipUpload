@@ -18,7 +18,7 @@ $messages['en'] = array(
         'clipup-failduploadText' => ':[Clip_Upload:upload faild(%s)]',
         //please dont translate inside the flag%s,is will be replace some other text
         'clipup-uploadingText' => ':[Clip_Upload:Uploading %s(%sKB)...]',
-        'clipup-urlText' => ':[[File:{filename}]]', #替换后的URL地址
+        'clipup-urlText' => ':[[File:%s]]', #替换后的URL地址
         'clipup-notsamesize' => ':[Clip_Upload:Clip has same]', #不一样大小提示
         'clipup-filehastoolarge' => ':[Clip_Upload:File has too large: %sKB!]', #文件太大了
         'clipup-errdoingupload' => ':[Clip_Upload:Error to upload]', #上传的时候发生意外

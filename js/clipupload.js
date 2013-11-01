@@ -1,4 +1,3 @@
-var gallery_arr = new Array();
 var last_file_size = 0; //上次文件大小
 
 $(document).ready(function() { //jquery      
