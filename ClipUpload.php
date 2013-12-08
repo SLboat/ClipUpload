@@ -67,7 +67,7 @@ function ClipSetup()
     }
     //是否检查文件一样大小
     if (is_null($wgClipUP_CheckSameFileSize)) {
-        $wgClipUP_CheckSameFileSize = flase;
+        $wgClipUP_CheckSameFileSize = false;
     }
     
     //js临时方式输出一种变量，注册message或许更好
@@ -80,8 +80,8 @@ function ClipSetup()
     //php-json格式化-参考自msupload
     $clipup_vars = json_encode($clipup_vars);
     
-    //输出到全局script
-    $wgOut->addScript("<script type=\"{$wgJsMimeType}\">var clipup_vars = $clipup_vars;</script>\n");
+    //输出到全局script,或许该有点别的方式来工作
+    $wgOut->addScript("<script type='text/javascript'>var clipup_vars = $clipup_vars ;</script>\n");
     
     //load module
     $wgOut->addModules('ext.ClipUpload');
