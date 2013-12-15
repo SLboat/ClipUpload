@@ -13,14 +13,14 @@ if (!defined('MEDIAWIKI')) {
 ## Register extension setup hook and credits:
 $wgExtensionCredits['parserhook'][] = array(
     'name' => 'ClipUpload',
-    'url' => 'http://see.sl088.com/id/49t',
+    'url' => 'https://www.mediawiki.org/wiki/Extension:ClipUpload',
     'descriptionmsg' => 'clipup-desc',
     'version' => '1.2',
     'author' => '[http://see.sl088.ccom SLboat]'
 );
 
 $dir = dirname(__FILE__) . '/';
-$wgExtensionMessagesFiles['clipup'] = $dir . 'ClipUpload.i18n.php';
+$wgExtensionMessagesFiles['ClipUpload'] = $dir . 'ClipUpload.i18n.php';
 
 $wgHooks['EditPage::showEditForm:initial'][] = 'ClipSetup';
 
@@ -39,7 +39,7 @@ $wgResourceModules['ext.ClipUpload'] = array(
         'clipup-uploadingText',
         'clipup-urlText', 
         'clipup-notsamesize',
-        'clipup-filehastoolarge', 
+        'clipup-istoolarge', 
         'clipup-errdoingupload',
         'clipup-mwfeedbackerrorText',
 
@@ -59,7 +59,7 @@ function ClipSetup()
     
     //未定义时候的默认值
     if (is_null($wgClipUP_Comment)) {
-        $wgClipUP_Comment = 'this file is by clipboard upload  [[category:clipboard upload]]';
+        $wgClipUP_Comment = 'This file was uploaded from the clipboard ([[Category:Clipboard upload]]).';
     }
     //最大默认500K
     if (is_null($wgClipUP_MaxFileSize)) {
