@@ -14,14 +14,22 @@ The ClipUpload extension allows to upload files directly from your clipboard.
 
 This extension provides three parameters available for configuration:
 * $wgClipUP_Comment
+
 .. Allows to set a standard text added to the files description upon uploading a file.
-.. Standard value is <code>This file was uploaded from the clipboard (<nowiki>[[Category:Clipboard upload]]</nowiki>).</code>
+
+.. Standard value is `This file was uploaded from the clipboard ([[Category:Clipboard upload]]).`
+
 * $wgClipUP_MaxFileSize
+
 .. Allows to set the maximum size in KB for files uploadable by this extension.
+
 .. Standard value is <code>500</code>
+
 * $wgClipUP_CheckSameFileSize
-. Allows to check if the size of a file is the same as for the previously uploaded file.
-. Standard value is <code>false</code>
+
+.. Allows to check if the size of a file is the same as for the previously uploaded file.
+
+.. Standard value is <code>false</code>
 
 ### Links
 
