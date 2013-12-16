@@ -1,0 +1,35 @@
+== ClipUpload ==
+
+The ClipUpload extensin allows to upload files directly from your clipboard.
+
+== Installation ==
+
+# [https://github.com/SLboat/ClipUpload/archive/master.zip Download] the extension.
+# Extract the files in a directory called <code>ClipUpload</code> in your <code>extensions/<code> folder.
+# Add <code>require_once "$IP/extensions/ClipUpload/ClipUpload.php";</code> to your "LocalSettings.php" file.
+# Configure this extension as needed (see the [[#Configuration|configuration section]]).
+# Verify the installation on "Special:Version".
+
+== Configuration ==
+
+This extension provides three parameters available for configuration:
+; $wgClipUP_Comment
+: Allows to set a standard text added to the files description upon uploading a file.
+: Standard value is <code>This file was uploaded from the clipboard (<nowiki>[[Category:Clipboard upload]]</nowiki>).</code>
+; $wgClipUP_MaxFileSize
+: Allows to set the maximum size in KB for files uploadable by this extension.
+: Standard value is <code>500</code>
+; $wgClipUP_CheckSameFileSize
+: Allows to check if the size of a file is the same as for the previously uploaded file.
+: Standard value is <code>false</code>
+
+== Links ==
+
+* [https://www.mediawiki.org/wiki/Extension:ClipUpload Homepage]
+* [https://www.mediawiki.org/wiki/Extension_talk:ClipUpload Support]
+* [https://github.com/SLboat/ClipUpload/issues Issue tracker]
+* [https://github.com/SLboat/ClipUpload Source code]
+
+== Note ==
+This README file was created in wikitext to support embedding it into a wiki page using
+the [https://www.mediawiki.org/wiki/Extension:GitHub GitHub] extension.
