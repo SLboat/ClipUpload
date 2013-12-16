@@ -7,7 +7,7 @@ The ClipUpload extension allows to upload files directly from your clipboard.
 1. [Download](https://github.com/SLboat/ClipUpload/archive/master.zip) the extension.
 2. Extract the files in a directory called `ClipUpload` in your `extensions/` folder.
 3. Add `require_once "$IP/extensions/ClipUpload/ClipUpload.php";` to your "LocalSettings.php" file.
-4. Configure this extension as needed (see the [[#Configuration|configuration section]]).
+4. Configure this extension as needed (see the configuration section).
 5. Verify the installation on "Special:Version".
 
 ### Configuration
