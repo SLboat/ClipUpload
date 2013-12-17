@@ -15,7 +15,7 @@ $messages = array();
  */
 $messages['en'] = array(
 	'clipup-desc' => 'Allows to upload files directly from the clipboard using InlineAttachement',
-        'clipup-notLoadConfig' => '[Clip_Upload:Config Not Load...]',
+        'clipup-notLoadConfig' => '[Clip_Upload:The configuration was not loaded]',
         'clipup-progressText' => ':[Clip_Upload:Uploading file …]()',
         'clipup-failduploadText' => ':[Clip_Upload:Upload failed (%s)]',
         //please do not translate inside the flag%s. It will be replace some other text.
@@ -32,7 +32,7 @@ $messages['en'] = array(
  */
 $messages['de'] = array(
         'clipup-desc' => 'Ermöglicht das direkte Hochladen von Dateien aus der Zwischenablage',
-        //here may need a transalte for 'clipup-notLoadConfig' -- slbaot
+        'clipup-notLoadConfig' => '[Clip_Upload:Die Konfiguration wurde nicht geladen.]',
         'clipup-progressText' => ':[Clip_Upload:Lädt Datei hoch …]()',
         'clipup-failduploadText' => ':[Clip_Upload:Das Hochladen ist gescheitert (%s).]',
         'clipup-uploadingText' => ':[Clip_Upload:Lädt %s hoch (%s KB) …',
