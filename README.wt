@@ -1,6 +1,7 @@
 == ClipUpload ==
 
-The ClipUpload extensin allows to upload files directly from your clipboard.
+The ClipUpload extension allows to upload files directly from your clipboard. Currently Google Chrome is the only
+supported browser.
 
 == Installation ==
 
@@ -29,7 +30,12 @@ This extension provides three parameters available for configuration:
 * [https://www.mediawiki.org/wiki/Extension_talk:ClipUpload Support]
 * [https://github.com/SLboat/ClipUpload/issues Issue tracker]
 * [https://github.com/SLboat/ClipUpload Source code]
+* [http://see.sl088.com/id/49t Author]
+
+== Compatibility ==
+* Currently Google Chrome is the only supported browser.
+* Tested an working with MW 1.20.x and MW 1.21.x 
 
 == Note ==
-This README file was created in wikitext to support embedding it into a wiki page using
-the [https://www.mediawiki.org/wiki/Extension:GitHub GitHub] extension.
+This README file was created in wikitext to support embedding it into a wiki page using the
+[https://www.mediawiki.org/wiki/Extension:GitHub GitHub] extension.
