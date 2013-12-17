@@ -1,9 +1,19 @@
 <?php
-############################################################
-#Author:
-#Slboat,http://see.sl088.com
-#
-############################################################
+/**
+ * Initialization file for the ClipUpload extension.
+ * 
+ * @link https://www.mediawiki.org/wiki/Extension:ClipUpload Documentation
+ * @link https://www.mediawiki.org/wiki/Extension_talk:ClipUpload Support
+ * @link https://github.com/SLboat/ClipUpload/issues Issue tracker
+ * @link https://github.com/SLboat/ClipUpload Source Code
+ * @link http://see.sl088.com Author
+ *
+ * @ingroup Extensions
+ *
+ * @licence http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
+ * @author Slboat
+ */
+
 # Setup and Hooks for the MsUpload extension
 if (!defined('MEDIAWIKI')) {
     echo ("This file is an extension to the MediaWiki software and cannot be used standalone.\n");
@@ -15,8 +25,8 @@ $wgExtensionCredits['parserhook'][] = array(
     'name' => 'ClipUpload',
     'url' => 'https://www.mediawiki.org/wiki/Extension:ClipUpload',
     'descriptionmsg' => 'clipup-desc',
-    'version' => '1.2',
-    'author' => '[http://see.sl088.ccom SLboat]'
+    'version' => '1.2.1',
+    'author' => '[http://see.sl088.com SLboat]'
 );
 
 $dir = dirname(__FILE__) . '/';
