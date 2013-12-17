@@ -40,7 +40,7 @@ This extension provides three parameters available for configuration:
 * [Source code](https://github.com/SLboat/ClipUpload)
 * [Author](http://see.sl088.com/id/49t Author)
 
-### Thank To
-* Karsten Hoffmeyer make all the doc for better read
+### Thanks go to
 * Martin Schwindl, who made the great upload extension MsUpload
 * rickyb98 for his help testing it a lot!
+* Karsten Hoffmeyer for improving the documentation
