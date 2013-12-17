@@ -44,6 +44,7 @@ $wgResourceModules['ext.ClipUpload'] = array(
     // 多语言消息文本咯
     'messages' => array(
         'clipup-desc',
+        'clipup-notLoadConfig', //will cause this if clipup_vars not load
         'clipup-progressText',
         'clipup-failduploadText',
         'clipup-uploadingText',
@@ -91,6 +92,7 @@ function ClipSetup()
     $clipup_vars = json_encode($clipup_vars);
     
     //输出到全局script,或许该有点别的方式来工作
+    /* if this faild,will cause 'clipup-notLoadConfig' say it */
     $wgOut->addScript("<script type='text/javascript'>var clipup_vars = $clipup_vars ;</script>\n");
     
     //load module

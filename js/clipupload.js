@@ -11,11 +11,10 @@ $(document).ready(function() { //jquery
 //开始设置剪贴板玩意
 
 function work_clipboard() {
-	//基础api地址
-	clipup_vars.debug = clipup_vars.debug || false; //默认为假
 
 	var ClipSetting = {
 
+		//基础api地址
 		base_api_url: "api.php",
 
 		// 调用的负责处理的API
@@ -38,21 +37,26 @@ function work_clipboard() {
 		// 当通过剪贴板接受到一个文件的事件，参数{Blob}文件,file,size就是文件大小
 		onReceivedFile: function(file) {
 			var KBSize = Math.round(file.size / 1024);
-			if (clipup_vars.debug)
-				this.filename = "I_From_CLIP.PNG"; //调试文件名称
-			else {
-				//获得一个文件名-独一无二的
-				this.filename = getTimeFileName();
-			}
 			//检查文件大小
-			if (file.size == last_file_size) {
+			if (typeof(clipup_vars) == "undefined") {
+				//不存在配置变量
+				this.progressText = mw.msg("clipup-notLoadConfig");
+				//既然都要死亡,或许加个[this.faild]?
+			} else if (file.size == last_file_size) {
 				//和上次一样不传
 				this.progressText = mw.msg("clipup-notsamesize");
 			} else if (CheckFileSize(file.size)) {
 				//显示工具栏提示
 				this.progressText = mw.msg("clipup-istoolarge").replace("%s", KBSize);
 				//文件太大了，加以提醒
-			} else {
+			} else { //一切顺利-来到了这里
+				//文件名处理-这类一切看起来都好
+				if (clipup_vars.debug) //If undefined should be faild too
+					this.filename = "I_From_CLIP.PNG"; //调试文件名称
+				else {
+					//获得一个文件名-独一无二的
+					this.filename = getTimeFileName();
+				}
 				//这里会被预先处理
 				this.progressText = mw.msg("clipup-uploadingText").replace("%s", this.filename).replace("%s", KBSize)
 
@@ -75,11 +79,14 @@ function work_clipboard() {
 
 		//上传前处理文件是否可以上载
 		customUploadHandler: function(file) {
-			if (file.size == last_file_size) {
+			if (typeof(clipup_vars) == "undefined") {
+				//没有配置信息
+				return false;
+			} else if (file.size == last_file_size) {
 				//文件大写一样不传
 				return false;
 			}
-			//检查文件够大不
+			//检查文件够大不-最后的检查
 			return !CheckFileSize(file.size);
 
 		}
