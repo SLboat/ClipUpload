@@ -39,3 +39,8 @@ This extension provides three parameters available for configuration:
 * [Issue tracker](https://github.com/SLboat/ClipUpload/issues)
 * [Source code](https://github.com/SLboat/ClipUpload)
 * [Author](http://see.sl088.com/id/49t Author)
+
+### Thank To
+* Karsten Hoffmeyer make all the doc for better read
+* Martin Schwindl, who made the great upload extension MsUpload
+* rickyb98 for his help testing it a lot!
