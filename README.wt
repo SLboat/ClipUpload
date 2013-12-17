@@ -8,7 +8,7 @@ supported browser.
 # [https://github.com/SLboat/ClipUpload/archive/master.zip Download] the extension.
 # Extract the files in a directory called <code>ClipUpload</code> in your <code>extensions/<code> folder.
 # Add <code>require_once "$IP/extensions/ClipUpload/ClipUpload.php";</code> to your "LocalSettings.php" file.
-# Configure this extension as needed (see the [[#Configuration|configuration section]]).
+# Configure this extension as needed by adding the parameters to your "LocalSettings.php" file<br />(see the [[#Configuration|configuration section]]).
 # Verify the installation on "Special:Version".
 
 == Configuration ==
@@ -24,6 +24,10 @@ This extension provides three parameters available for configuration:
 : Allows to check if the size of a file is the same as for the previously uploaded file.
 : Standard value is <code>false</code>
 
+== Compatibility ==
+* Currently Google Chrome is the only supported browser.
+* Tested an working with MW 1.20.x and MW 1.21.x
+
 == Links ==
 
 * [https://www.mediawiki.org/wiki/Extension:ClipUpload Homepage]
@@ -31,10 +35,6 @@ This extension provides three parameters available for configuration:
 * [https://github.com/SLboat/ClipUpload/issues Issue tracker]
 * [https://github.com/SLboat/ClipUpload Source code]
 * [http://see.sl088.com/id/49t Author]
-
-== Compatibility ==
-* Currently Google Chrome is the only supported browser.
-* Tested an working with MW 1.20.x and MW 1.21.x 
 
 == Note ==
 This README file was created in wikitext to support embedding it into a wiki page using the
