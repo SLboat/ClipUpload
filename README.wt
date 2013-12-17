@@ -36,6 +36,12 @@ This extension provides three parameters available for configuration:
 * [https://github.com/SLboat/ClipUpload Source code]
 * [http://see.sl088.com/id/49t Author]
 
+== Thanks go to ==
+* Martin Schwindl, who made the great upload extension MsUpload
+* rickyb98 for his help testing it a lot!
+* Karsten Hoffmeyer for improving the documentation
+
 == Note ==
 This README file was created in wikitext to support embedding it into a wiki page using the
-[https://www.mediawiki.org/wiki/Extension:GitHub GitHub] extension.
+[https://www.mediawiki.org/wiki/Extension:GitHub GitHub] extension. Alternativly you can just copy
+the contents into a wiki page directly.
