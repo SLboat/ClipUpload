@@ -27,6 +27,22 @@ $messages['en'] = array(
         'clipup-mwfeedbackerrorText' => '[Clip_Upload:An error occured during the upload (%s)]',
 );
 
+/** French
+ * @author pano-pano
+ */
+$messages['fr'] = array(
+        'clipup-desc' => 'Permet de televerser des fichiers directement depuis le presse-papier en utilisant la fonctionnalite InlineAttachement',
+        'clipup-notLoadConfig' => '[Clip_Upload:Configuration non chargee]',
+        'clipup-progressText' => ':[Clip_Upload:Televersement du fichier …]()',
+        'clipup-failduploadText' => ':[Clip_Upload:Erreur du televersement (%s)]',
+        'clipup-uploadingText' => ':[Clip_Upload:Televersement %s (%s KB) …]',
+        'clipup-urlText' => ':[[File:%s]]',
+        'clipup-notsamesize' => ':[Clip_Upload:Fichier non-identique]',
+        'clipup-istoolarge' => ':[Clip_Upload:La taille du fichier est trop importante: %s KB!]',
+        'clipup-errdoingupload' => ':[Clip_Upload:Une erreur a eu lieu pendant le televersement]',
+        'clipup-mwfeedbackerrorText' => '[Clip_Upload:Une erreur a eu lieu pendant le televersement (%s)]',
+);
+
 /** German (Deutsch)
  * @author Kghbln
  */
