@@ -55,7 +55,7 @@ function work_clipboard() {
 					this.filename = "I_From_CLIP.PNG"; //调试文件名称
 				else {
 					//获得一个文件名-独一无二的
-					this.filename = getTimeFileName();
+					this.filename = getTimeFileNameByClip();
 				}
 				//这里会被预先处理
 				this.progressText = mw.msg("clipup-uploadingText").replace("%s", this.filename).replace("%s", KBSize)
@@ -104,7 +104,7 @@ function work_clipboard() {
  * 参数：传入参数file_index为所在的文件序号
  */
 
-function getTimeFileName(file_index) {
+function getTimeFileNameByClip(file_index) {
 	if (typeof(file_index) == "undefined") {
 		file_index = ""; // 未定义的时候得到空白
 	} else {

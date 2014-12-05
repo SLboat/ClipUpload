@@ -97,12 +97,12 @@
 		 */
 		this.onUploadedFile = function(data, upload_file) {
 			var result = settings.onUploadedFile(data, upload_file);
-			var replaceValue = null,
-				filename;
+			var replaceValue = null;
+			var filename;
 			//检查是否出错
 			if (data.error) {
 				//进行适当的替换最终错误信息
-				replaceValue = this.mwfeedbackerrorText.replace("%s", data.error.info);
+				replaceValue = settings.mwfeedbackerrorText.replace("%s", data.error.info);
 			} else {
 				var return_json = data.upload;
 				//检查返回状态
