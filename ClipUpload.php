@@ -37,6 +37,7 @@ $wgHooks['EditPage::showEditForm:initial'][] = 'ClipSetup';
 $wgResourceModules['ext.ClipUpload'] = array(
     // load the js module
     'scripts' => array(
+        'js/paste.js',
         'js/inline-attach.js',
         'js/clipupload.js',
         'js/ink-go.js'
