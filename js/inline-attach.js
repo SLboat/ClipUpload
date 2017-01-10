@@ -199,26 +199,14 @@
 		 * @param {Event} e
 		 * @returns {Boolean} If a file is handled
 		 */
-		this.onPaste = function(e) {
-			var result = false,
-				clipboardData = e.clipboardData;
-
-			if (typeof clipboardData === "object" && clipboardData.items !== null) {
-				//todo: 只处理一个文件
-				for (var i = 0; i < clipboardData.items.length; i++) {
-					var item = clipboardData.items[i];
-					if (me.isAllowedFile(item)) {
-						result = true;
-						this.onReceivedFile(item.getAsFile());
-						if (this.customUploadHandler(item.getAsFile())) {
-							this.uploadFile(item.getAsFile());
-						}
-					}
-				}
+		this.onPaste = function(ev, data) {
+			this.onReceivedFile(data.blob);
+			
+			if (this.customUploadHandler(data.blob)) {
+				this.uploadFile(data.blob);
 			}
-
-
-			return result;
+			
+			return true;
 		};
 
 	};
@@ -311,10 +299,12 @@
 
 		var editor = new inlineAttach.Editor(input),
 			inlineattach = new inlineAttach(options, editor);
-
-		input.addEventListener('paste', function(e) {
-			inlineattach.onPaste(e);
-		}, false);
+		
+		$(input).pastableTextarea();
+		
+		$(input).on('pasteImage', function(ev, data) {
+			inlineattach.onPaste(ev, data);
+		});
 
 	};
 
