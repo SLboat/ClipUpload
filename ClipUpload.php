@@ -25,8 +25,9 @@ $wgExtensionCredits['parserhook'][] = array(
     'name' => 'ClipUpload',
     'url' => 'https://www.mediawiki.org/wiki/Extension:ClipUpload',
     'descriptionmsg' => 'clipup-desc',
-    'version' => '1.2.1',
-    'author' => '[http://see.sl088.com SLboat]'
+    'version' => '1.3.0',
+    'author' => '[http://see.sl088.com SLboat]',
+    'license-name' => 'GPL-2.0+'
 );
 
 $dir = dirname(__FILE__) . '/';
