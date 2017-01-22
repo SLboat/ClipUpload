@@ -1,7 +1,6 @@
 ## ClipUpload
 
-The ClipUpload extension allows to upload files directly from your clipboard. Currently Google Chrome is
-the only supported browser.
+The ClipUpload extension allows to upload files directly from your clipboard.
 
 
 ### Installation
@@ -29,7 +28,6 @@ This extension provides three parameters available for configuration:
 
 ### Compatibility
 
-* Currently Google Chrome is the only supported browser.
 * Tested an working with MW 1.20.x and MW 1.21.x
 
 ### Links
