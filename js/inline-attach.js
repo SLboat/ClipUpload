@@ -63,7 +63,7 @@
 			formData.append("comment", clipup_vars.comment);
 			formData.append("format", "json");
 			//token这里是
-			formData.append("token", mw.user.tokens.get('editToken'));
+			formData.append("token", mw.user.tokens.get('csrfToken'));
 
 			//todo：改写post数据包含更多参数
 			xhr.open('POST', settings.uploadUrl);
